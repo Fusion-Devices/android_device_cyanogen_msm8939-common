@@ -47,7 +47,7 @@ TARGET_NO_BOOTLOADER := true
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_PATH)/mkbootimg.mk
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.selinux=permissive androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
@@ -57,6 +57,23 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_USES_UNCOMPRESSED_KERNEL := true
+ifneq ($(TARGET_BUILD_VARIANT),user)
+TARGET_KERNEL_ADDITIONAL_CONFIG := cyanogenmod_debug_config
+endif
+
+# Fusion Optimizations
+FUSION_OPT= true
+FUSION_O3 := true
+FUSION_STRICT := false
+FUSION_OFAST := false
+FUSION_KRAIT := false
+FUSION_GRAPHITE := false
+FUSION_PIPE := false
+FUSION_ENABLE_GCCONLY := false
+FLOOP_NEST_OPTIMIZE := false
+FUSION_FFAST_MATH := false
+TARGET_FUSION_ROM := 4.9
+TARGET_FUSION_KERNEL := 5.2-sm
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -158,6 +175,9 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# SaberMod
+-include vendor/fusion/config/sm.mk
 
 # inherit from the proprietary version
 -include vendor/cyanogen/msm8939-common/BoardConfigVendor.mk
