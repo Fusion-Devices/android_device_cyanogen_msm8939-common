@@ -57,6 +57,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_USES_UNCOMPRESSED_KERNEL := true
+TARGET_KERNEL_CONFIG := cyanogenmod_tomato-64_defconfig
 
 # Fusion Optimizations
 FUSION_OPT= true
@@ -69,8 +70,8 @@ FUSION_PIPE := false
 FUSION_ENABLE_GCCONLY := false
 FLOOP_NEST_OPTIMIZE := false
 FUSION_FFAST_MATH := false
-TARGET_FUSION_ROM := 4.9
-TARGET_FUSION_KERNEL := 5.2-sm
+#TARGET_FUSION_ROM := 4.9
+#TARGET_FUSION_KERNEL := 4.9-sm
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -177,4 +178,4 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 -include vendor/fusion/config/sm.mk
 
 # inherit from the proprietary version
--include vendor/cyanogen/msm8939-common/BoardConfigVendor.mk
+-include vendor/yu/tomato/BoardConfigVendor.mk
